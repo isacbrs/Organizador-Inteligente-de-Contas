@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.routes.auth import router as auth_router # <-- NOVA IMPORTAÇÃO
+from app.api.routes.auth import router as auth_router
+from app.api.routes.contas import router as contas_router # <-- IMPORTAÇÃO
 
 app = FastAPI(
     title="API - Organizador Inteligente de Contas",
@@ -16,8 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# <-- CONECTANDO AS ROTAS DE AUTENTICAÇÃO AO APLICATIVO
 app.include_router(auth_router)
+app.include_router(contas_router) # <-- CONEXÃO DA ROTA
 
 @app.get("/")
 async def root():
